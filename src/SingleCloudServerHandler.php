@@ -63,7 +63,7 @@ class SingleCloudServerHandler
     /**
      * @return mixed
      */
-    public function getVnvConsole(){
+    public function getVncConsole(){
         return $this->client->get($this->basePath.'/vnc');
     }
 
