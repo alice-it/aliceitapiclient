@@ -1,6 +1,8 @@
 <?php
 namespace AliceIT;
 
+use AliceIT\Domains\DomainHandler;
+
 class ServicesHandler
 {
     private $client;
@@ -22,5 +24,14 @@ class ServicesHandler
         }
 
         return $this->cloudServerHandler;
+    }
+
+    private $domainHandler;
+    public function domains(){
+        if(!$this->domainHandler) {
+            $this->domainHandler = new DomainHandler($this->client);
+        }
+
+        return $this->domainHandler;
     }
 }

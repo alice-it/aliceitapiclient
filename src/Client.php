@@ -3,7 +3,9 @@
 namespace AliceIT;
 
 use AliceIT\Exception\MalformedException;
+use Exception;
 use GuzzleHttp\Exception\RequestException;
+use GuzzleHttp\Exception\ClientException;
 
 class Client
 {
@@ -97,11 +99,18 @@ class Client
      * @param $response
      * @return mixed
      */
-    private function parseRequest($response)
+    private function parseRequest($response, $code = "")
     {
         $response = $response->getBody()->__toString();
         $result = json_decode($response);
         if (json_last_error() == JSON_ERROR_NONE) {
+            if(isset($result->errors))
+                $result->success = false;
+
+            if(!empty($code)){
+                $result->code = $code;
+            }
+
             return $result;
         } else {
             return $response;
@@ -115,8 +124,15 @@ class Client
      */
     public function get($actionPath, $params = [])
     {
-        $response = $this->request($actionPath, $params);
-        return $this->parseRequest($response);
+        $code = "";
+        try{
+            $response = $this->request($actionPath, $params);
+        }catch(ClientException $e){
+            $code = $e->getCode();
+            $response = $e->getResponse();
+        }
+        
+        return $this->parseRequest($response, $code);
     }
 
     /**
@@ -126,8 +142,15 @@ class Client
      */
     public function put($actionPath, $params = [])
     {
-        $response = $this->request($actionPath, $params, 'PUT');
-        return $this->parseRequest($response);
+        $code = "";
+        try{
+            $response = $this->request($actionPath, $params, 'PUT');
+        }catch(ClientException $e){
+            $code = $e->getCode();
+            $response = $e->getResponse();
+        }
+        
+        return $this->parseRequest($response, $code);
     }
 
     /**
@@ -137,8 +160,15 @@ class Client
      */
     public function post($actionPath, $params = [])
     {
-        $response = $this->request($actionPath, $params, 'POST');
-        return $this->parseRequest($response);
+        $code = "";
+        try{
+            $response = $this->request($actionPath, $params, 'POST');
+        }catch(ClientException $e){
+            $code = $e->getCode();
+            $response = $e->getResponse();
+        }
+        
+        return $this->parseRequest($response, $code);
     }
 
     /**
@@ -148,8 +178,15 @@ class Client
      */
     public function delete($actionPath, $params = [])
     {
-        $response = $this->request($actionPath, $params, 'DELETE');
-        return $this->parseRequest($response);
+        $code = "";
+        try{
+            $response = $this->request($actionPath, $params, 'DELETE');
+        }catch(ClientException $e){
+            $code = $e->getCode();
+            $response = $e->getResponse();
+        }
+        
+        return $this->parseRequest($response, $code);
     }
 
     private $servicesHandler;
