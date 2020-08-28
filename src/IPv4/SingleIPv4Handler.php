@@ -10,7 +10,7 @@ class SingleIPv4Handler
     private $basePath;
 
     /**
-     * SingeDomainHandler constructor.
+     * SingleIPv4Handler constructor.
      * @param $id
      * @param Client $client
      */

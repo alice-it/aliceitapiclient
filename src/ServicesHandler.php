@@ -2,7 +2,7 @@
 namespace AliceIT;
 
 use AliceIT\Domains\DomainHandler;
-use AliceIT\Domains\Nameserver\IPv4Handler;
+use AliceIT\IPv4\IPv4Handler;
 
 class ServicesHandler
 {
