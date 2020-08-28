@@ -2,6 +2,7 @@
 namespace AliceIT;
 
 use AliceIT\Domains\DomainHandler;
+use AliceIT\Domains\Nameserver\IPv4Handler;
 
 class ServicesHandler
 {
@@ -33,5 +34,14 @@ class ServicesHandler
         }
 
         return $this->domainHandler;
+    }
+
+    private $ipv4Handler;
+    public function ip_addresses(){
+        if(!$this->ipv4Handler) {
+            $this->ipv4Handler = new IPv4Handler($this->client);
+        }
+
+        return $this->ipv4Handler;
     }
 }
