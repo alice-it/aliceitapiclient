@@ -157,7 +157,7 @@ class SingleCloudServerHandler
      * @return mixed
      */
     public function setRdns($ip, $value){
-        return $this->client->get($this->basePath.'/rdns',
+        return $this->client->post($this->basePath.'/rdns',
             [
                 'ip' => $ip,
                 'value' => $value
