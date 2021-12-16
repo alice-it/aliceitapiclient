@@ -37,7 +37,7 @@ class CloudServerHandler
             'password'          => ['nullable']
      */
 
-    public function create($cores, $memory, $disk, $ips, $os, $disk_secondary = null, $hostname = null, $password = null, $traffic = null){
+    public function create($cores, $memory, $disk, $ips, $os, $disk_secondary = null, $hostname = null, $password = null, $traffic = null, $additionalData = null){
         if($disk_secondary != null)
             $data['disk_secondary'] = $disk_secondary;
 
@@ -56,6 +56,10 @@ class CloudServerHandler
         $data['disk'] = $disk;
         $data['ips'] = $ips;
         $data['os'] = $os;
+        
+        if(isset($additionalData)){
+            $data = array_merge($data, $additionalData);
+        }
 
         return $this->client->post('services/kvm', $data);
     }
