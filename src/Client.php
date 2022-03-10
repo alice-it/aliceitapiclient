@@ -50,19 +50,23 @@ class Client
 
         $url = $this->url . $actionPath;
 
-        $params['api_token'] = $this->apiToken;
-
         switch($method){
             case 'GET':
                 return $this->getHttpClient()->get($url, [
-                    'headers'        => ['Accept' => 'application/json'],
+                    'headers'        => [
+                        'Accept' => 'application/json',
+                        'Authorization' => 'Bearer ' . $this->apiToken
+                    ],
                     'verify' => false,
                     'query' => $params,
                 ]);
                 break;
             case 'POST':
                 return $this->getHttpClient()->post($url, [
-                    'headers'        => ['Accept' => 'application/json'],
+                    'headers'        => [
+                        'Accept' => 'application/json',
+                        'Authorization' => 'Bearer ' . $this->apiToken
+                    ],
                     'verify' => false,
                     'query' => [
                         'api_token' => $this->apiToken,
@@ -72,7 +76,10 @@ class Client
                 break;
             case 'PUT':
                 return $this->getHttpClient()->put($url, [
-                    'headers'        => ['Accept' => 'application/json'],
+                    'headers'        => [
+                        'Accept' => 'application/json',
+                        'Authorization' => 'Bearer ' . $this->apiToken
+                    ],
                     'verify' => false,
                     'query' => [
                         'api_token' => $this->apiToken,
@@ -82,7 +89,10 @@ class Client
                 break;
             case 'DELETE':
                 return $this->getHttpClient()->delete($url, [
-                    'headers'        => ['Accept' => 'application/json'],
+                    'headers'        => [
+                        'Accept' => 'application/json',
+                        'Authorization' => 'Bearer ' . $this->apiToken
+                    ],
                     'verify' => false,
                     'query' => [
                         'api_token' => $this->apiToken,
