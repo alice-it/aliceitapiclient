@@ -164,4 +164,32 @@ class SingleCloudServerHandler
             ]
         );
     }
+    
+    /**
+     * @return mixed
+     */
+    public function listBackups(){
+        return $this->client->get($this->basPath.'/backups');   
+    }
+    
+    /**
+     * @return mixed
+     */
+    public function createBackup(){
+        return $this->client->post($this->basPath.'/backups');   
+    }
+    
+    /**
+     * @return mixed
+     */
+    public function restoreBackup($backup_id){
+        return $this->client->post($this->basPath.'/backups/'.$backup_id);   
+    }
+    
+    /**
+     * @return mixed
+     */
+    public function deleteBackup($backup_id){
+        return $this->client->delete($this->basPath.'/backups/'.$backup_id);   
+    }
 }
