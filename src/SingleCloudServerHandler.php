@@ -192,4 +192,15 @@ class SingleCloudServerHandler
     public function deleteBackup($backup_id){
         return $this->client->delete($this->basePath.'/backups/'.$backup_id);   
     }
+
+    /**
+     * @return mixed
+     */
+    public function setPassword($password){
+        return $this->client->post($this->basePath.'/set-password',
+            [
+                'password' => $password
+            ]
+        );
+    }
 }
