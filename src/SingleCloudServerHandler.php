@@ -203,4 +203,18 @@ class SingleCloudServerHandler
             ]
         );
     }
+
+    /**
+     * @return mixed
+     */
+    public function blockOutgoingMails(){
+        return $this->client->post($this->basePath.'/blockmailports');
+    }
+
+    /**
+     * @return mixed
+     */
+    public function unBlockOutgoingMails(){
+        return $this->client->post($this->basePath.'/unblockmailports');
+    }
 }
